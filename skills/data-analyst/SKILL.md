@@ -22,7 +22,7 @@ Authored for this analyst workflow:
 - `skills/plotting/` — create chart or visual artifacts from query results.
 - `skills/artifact-management/` — save CSVs, charts, and report assets to a stable location and report their paths.
 
-Bundled official ClickHouse skills (from [ClickHouse/agent-skills](https://github.com/ClickHouse/agent-skills), Apache-2.0, vendored via a git submodule). Load these when the corresponding need arises:
+Bundled official ClickHouse skills (from [ClickHouse/agent-skills](https://github.com/ClickHouse/agent-skills), Apache-2.0, vendored as plain files; source commit and licence in `skills/VENDORED.md`). Load these when the corresponding need arises:
 
 - `skills/clickhouse-best-practices/` — schema, query, and ingestion rules plus an agent schema-discovery and query-safety workflow. Consult when writing or optimizing non-trivial SQL.
 - `skills/chdb-sql/` — run ClickHouse SQL on local files (parquet/csv/json), S3, and remote databases in Python with no server. Use for ad-hoc analysis over files or cross-source data.
