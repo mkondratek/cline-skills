@@ -104,11 +104,7 @@ skills/
     skills/clickhouse-best-practices/  Official ClickHouse skills, vendored (see below)
     skills/chdb-sql/
     skills/chdb-datastore/
-    skills/clickhousectl-local-dev/
-    skills/clickhousectl-cloud-deploy/
-    skills/clickhouse-architecture-advisor/
-    skills/clickhouse-js-node-coding/
-    skills/clickhouse-js-node-troubleshooting/
+    skills/infra-clickhouse/
     skills/VENDORED.md              Upstream commit and licence of the vendored skills
 .vendor/
   sdk-skill/                 Submodule of https://github.com/cline/sdk-skill
@@ -122,7 +118,7 @@ scripts/
 git submodule update --remote .vendor/sdk-skill
 ```
 
-The official ClickHouse skills under `skills/data-analyst/skills/` are copied from [`ClickHouse/agent-skills`](https://github.com/ClickHouse/agent-skills) (Apache-2.0) and committed as plain files, so installers that don't follow submodules still ship them. `skills/data-analyst/skills/VENDORED.md` records the upstream commit. To update to the latest upstream:
+The official ClickHouse skills under `skills/data-analyst/skills/` are copied from [`ClickHouse/agent-skills`](https://github.com/ClickHouse/agent-skills) (Apache-2.0) and committed as plain files, so installers that don't follow submodules still ship them. Only the skills the data-analyst workflow uses are vendored (the list is in `scripts/sync-vendored-skills.sh`). `skills/data-analyst/skills/VENDORED.md` records the upstream commit. To update to the latest upstream:
 
 ```
 scripts/sync-vendored-skills.sh main

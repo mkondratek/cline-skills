@@ -10,15 +10,14 @@
 set -euo pipefail
 
 REPO_URL="https://github.com/ClickHouse/agent-skills"
+# Only the upstream skills the data-analyst workflow hands off to (or that are
+# core to ad-hoc analysis). Users who want ClickHouse's full set can install it
+# directly with `npx skills add clickhouse/agent-skills`.
 SKILLS=(
   chdb-datastore
   chdb-sql
-  clickhouse-architecture-advisor
   clickhouse-best-practices
-  clickhouse-js-node-coding
-  clickhouse-js-node-troubleshooting
-  clickhousectl-cloud-deploy
-  clickhousectl-local-dev
+  infra-clickhouse
 )
 
 ROOT="$(git rev-parse --show-toplevel)"
@@ -44,6 +43,17 @@ COMMIT_DATE="$(git -C "$TMP" log -1 --format=%cs)"
 
 for s in "${SKILLS[@]}"; do
   [ -f "$TMP/skills/$s/SKILL.md" ] || { echo "Upstream $COMMIT has no skills/$s/SKILL.md" >&2; exit 1; }
+done
+
+# Remove previously vendored skills (as recorded in VENDORED.md), so dropping
+# a name from SKILLS above also drops its directory.
+if [ -f "$RECORD" ]; then
+  sed -n 's/^- `\([a-z0-9-]*\)\/`$/\1/p' "$RECORD" | while read -r old; do
+    rm -rf "${DEST:?}/$old"
+  done
+fi
+
+for s in "${SKILLS[@]}"; do
   rm -rf "${DEST:?}/$s"
   cp -R "$TMP/skills/$s" "$DEST/$s"
   # Repo/registry metadata and build templates; not read by the skills themselves.
@@ -65,6 +75,10 @@ The sub-skills listed below are copied from [ClickHouse/agent-skills]($REPO_URL)
 They are committed as plain files (not a submodule or symlinks) so that every
 installer that copies this repository (GitHub tarballs, \`npx skills\`, the Cline
 marketplace) delivers them.
+
+Only the skills the data-analyst workflow uses are vendored. ClickHouse's full
+set can be installed directly with \`npx skills add clickhouse/agent-skills\`.
+The list lives in \`scripts/sync-vendored-skills.sh\`.
 
 - Source: $REPO_URL
 - Commit: \`$COMMIT\` (committed upstream $COMMIT_DATE)

@@ -5,21 +5,21 @@ They are committed as plain files (not a submodule or symlinks) so that every
 installer that copies this repository (GitHub tarballs, `npx skills`, the Cline
 marketplace) delivers them.
 
+Only the skills the data-analyst workflow uses are vendored. ClickHouse's full
+set can be installed directly with `npx skills add clickhouse/agent-skills`.
+The list lives in `scripts/sync-vendored-skills.sh`.
+
 - Source: https://github.com/ClickHouse/agent-skills
-- Commit: `46ef08ccf32fa28587b64e0c79106ff437dc8fcb` (committed upstream 2026-05-26)
+- Commit: `356a8c1b9a7392adb389a132f5ad3fec38532a03` (committed upstream 2026-09-28)
 - Licence: Apache License 2.0, see `LICENSE-clickhouse-agent-skills` and `NOTICE-clickhouse-agent-skills` in this directory
-- Vendored on: 2026-10-10
+- Vendored on: 2026-10-13
 
 Skills, each copied from `skills/<name>/` upstream:
 
 - `chdb-datastore/`
 - `chdb-sql/`
-- `clickhouse-architecture-advisor/`
 - `clickhouse-best-practices/`
-- `clickhouse-js-node-coding/`
-- `clickhouse-js-node-troubleshooting/`
-- `clickhousectl-cloud-deploy/`
-- `clickhousectl-local-dev/`
+- `infra-clickhouse/`
 
 Upstream files are unmodified. Omitted from each skill: its top-level `README.md`
 and `metadata.json`, plus `rules/_*.md` (repo/registry metadata and build
